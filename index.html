@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLOSET ATTIRE — Modern Fashion</title>
+<meta name="google-site-verification" content="QymxrkaIapHech-D7gW5i7R5ojYd0rAKFp-5c_9cuRg" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F2EE;
+    --ink: #1A1714;
+    --muted: #8A8480;
+    --accent: #C8A882;
+    --white: #FDFCFB;
+    --border: #E2DDD8;
+    --cart-count: 0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(245,242,238,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 300; letter-spacing: 0.22em;
+    text-decoration: none; color: var(--ink);
+  }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--muted);
+    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  .nav-actions { display: flex; align-items: center; gap: 1.5rem; }
+
+  .search-wrap { position: relative; }
+  .search-wrap input {
+    background: transparent; border: none; border-bottom: 1px solid var(--border);
+    padding: 0.3rem 1.8rem 0.3rem 0.2rem;
+    font-family: 'DM Sans', sans-serif; font-size: 0.8rem; color: var(--ink);
+    width: 160px; outline: none; transition: border-color 0.2s;
+  }
+  .search-wrap input:focus { border-color: var(--accent); }
+  .search-wrap input::placeholder { color: var(--muted); }
+  .search-icon { position: absolute; right: 0; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 0.9rem; cursor: pointer; }
+
+  .cart-btn {
+    background: none; border: none; cursor: pointer;
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink); display: flex; align-items: center; gap: 0.5rem;
+    position: relative;
+  }
+  .cart-badge {
+    background: var(--accent); color: var(--white);
+    font-size: 0.65rem; border-radius: 50%; width: 18px; height: 18px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 500;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    margin-top: 72px;
+    height: calc(100vh - 72px);
+    display: grid; grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+  }
+
+  .hero-text {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 4rem 5rem 5rem;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    font-weight: 300; line-height: 1.05;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title em { font-style: italic; color: var(--accent); }
+
+  .hero-sub {
+    font-size: 0.9rem; color: var(--muted); line-height: 1.7;
+    max-width: 340px; margin-bottom: 2.5rem;
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    background: var(--ink); color: var(--white);
+    padding: 0.9rem 2rem; font-size: 0.78rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    border: none; cursor: pointer; text-decoration: none;
+    transition: background 0.25s, gap 0.25s;
+    align-self: flex-start;
+  }
+  .btn-primary:hover { background: var(--accent); gap: 1.2rem; }
+
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: transparent; color: var(--ink);
+    padding: 0.8rem 1.8rem; font-size: 0.78rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    border: 1px solid var(--ink); cursor: pointer; text-decoration: none;
+    transition: all 0.25s;
+  }
+  .btn-outline:hover { background: var(--ink); color: var(--white); }
+
+  .hero-image {
+    position: relative; overflow: hidden; background: #E8E3DC;
+  }
+
+  .hero-image-inner {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #E8E3DC 0%, #D4C9BA 40%, #C0B09A 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+
+  .hero-image-inner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23b09a80' fill-opacity='0.15'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .hero-mannequin {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10rem; color: rgba(255,255,255,0.25);
+    font-weight: 300; letter-spacing: -0.05em;
+    animation: float 4s ease-in-out infinite;
+    user-select: none;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .hero-tag {
+    position: absolute; bottom: 2.5rem; left: 2.5rem;
+    background: var(--white); padding: 1rem 1.4rem;
+    font-size: 0.75rem; letter-spacing: 0.06em;
+  }
+  .hero-tag strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; }
+
+  /* ── SECTION HEADERS ── */
+  .section { padding: 6rem 5rem; }
+  .section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3rem; }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300;
+    line-height: 1.1;
+  }
+  .section-title em { font-style: italic; color: var(--accent); }
+  .section-link {
+    font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none;
+    border-bottom: 1px solid var(--border); padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .section-link:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* ── PRODUCTS ── */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .product-card {
+    cursor: pointer; position: relative;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .product-card:nth-child(1) { animation-delay: 0.05s; }
+  .product-card:nth-child(2) { animation-delay: 0.12s; }
+  .product-card:nth-child(3) { animation-delay: 0.19s; }
+  .product-card:nth-child(4) { animation-delay: 0.26s; }
+  .product-card:nth-child(5) { animation-delay: 0.33s; }
+  .product-card:nth-child(6) { animation-delay: 0.4s; }
+  .product-card:nth-child(7) { animation-delay: 0.47s; }
+  .product-card:nth-child(8) { animation-delay: 0.54s; }
+
+  .product-image {
+    aspect-ratio: 3/4; overflow: hidden; position: relative;
+    margin-bottom: 1rem;
+  }
+
+  .product-image-inner {
+    width: 100%; height: 100%;
+    transition: transform 0.5s ease;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem;
+    position: relative;
+  }
+
+  .product-card:hover .product-image-inner { transform: scale(1.04); }
+
+  .product-badge {
+    position: absolute; top: 0.8rem; left: 0.8rem;
+    background: var(--ink); color: var(--white);
+    font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+  }
+
+  .product-badge.sale { background: var(--accent); }
+
+  .product-add {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(26,23,20,0.9); color: var(--white);
+    border: none; padding: 0.75rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    cursor: pointer; opacity: 0; transform: translateY(4px);
+    transition: opacity 0.25s, transform 0.25s;
+  }
+
+  .product-card:hover .product-add { opacity: 1; transform: translateY(0); }
+  .product-add:hover { background: var(--accent) !important; }
+
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-weight: 400; margin-bottom: 0.3rem;
+  }
+
+  .product-meta { display: flex; align-items: center; justify-content: space-between; }
+  .product-price { font-size: 0.85rem; color: var(--ink); }
+  .product-price .old { color: var(--muted); text-decoration: line-through; margin-right: 0.4rem; font-size: 0.78rem; }
+  .product-cat { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* ── STRIP BANNER ── */
+  .strip {
+    background: var(--ink); color: var(--white);
+    padding: 1rem 0; overflow: hidden;
+  }
+
+  .strip-inner {
+    display: flex; gap: 4rem;
+    animation: marquee 20s linear infinite;
+    width: max-content;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .strip-item {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    white-space: nowrap; display: flex; align-items: center; gap: 1rem;
+    color: rgba(255,255,255,0.7);
+  }
+  .strip-item::before { content: '✦'; color: var(--accent); }
+
+  /* ── FEATURED BANNER ── */
+  .featured-banner {
+    margin: 0 5rem 6rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 480px; overflow: hidden;
+  }
+
+  .featured-visual {
+    background: linear-gradient(135deg, #2A2420 0%, #3D342C 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8rem; position: relative; overflow: hidden;
+  }
+
+  .featured-visual::after {
+    content: 'SS 2026';
+    position: absolute; bottom: 1.5rem; right: 1.5rem;
+    font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .featured-content {
+    background: var(--white); padding: 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+
+  .featured-content .eyebrow {
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1rem;
+  }
+
+  .featured-content h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6rem; font-weight: 300; line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .featured-content p {
+    font-size: 0.88rem; color: var(--muted); line-height: 1.7;
+    margin-bottom: 2rem; max-width: 320px;
+  }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: var(--white);
+    padding: 6rem 5rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+  }
+
+  .contact-info h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 300; line-height: 1.1; margin-bottom: 1.5rem;
+  }
+
+  .contact-info h2 em { font-style: italic; color: var(--accent); }
+
+  .contact-info p {
+    font-size: 0.88rem; color: var(--muted); line-height: 1.8; margin-bottom: 2rem;
+  }
+
+  .contact-detail {
+    display: flex; flex-direction: column; gap: 0.8rem; margin-top: 2rem;
+  }
+
+  .contact-detail span {
+    font-size: 0.8rem; color: var(--muted);
+    display: flex; align-items: center; gap: 0.7rem;
+  }
+
+  .contact-detail span strong { color: var(--ink); font-weight: 400; }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+  .form-group label {
+    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: transparent;
+    border: none; border-bottom: 1px solid var(--border);
+    padding: 0.7rem 0;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--ink);
+    outline: none; transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--accent); }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: var(--border); }
+
+  .form-group textarea { resize: none; height: 80px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+  .form-submit {
+    background: var(--ink); color: var(--white); border: none;
+    padding: 1rem 2.5rem; font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.25s; align-self: flex-start;
+    margin-top: 0.5rem;
+  }
+  .form-submit:hover { background: var(--accent); }
+
+  /* ── CART DRAWER ── */
+  .cart-overlay {
+    position: fixed; inset: 0; background: rgba(26,23,20,0.4);
+    z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+  }
+  .cart-overlay.open { opacity: 1; pointer-events: all; }
+
+  .cart-drawer {
+    position: fixed; top: 0; right: 0; bottom: 0; width: 420px;
+    background: var(--white); z-index: 201;
+    transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    display: flex; flex-direction: column;
+  }
+  .cart-drawer.open { transform: translateX(0); }
+
+  .cart-head {
+    padding: 2rem; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .cart-head h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 400;
+  }
+
+  .cart-close {
+    background: none; border: none; font-size: 1.4rem; cursor: pointer;
+    color: var(--muted); transition: color 0.2s;
+  }
+  .cart-close:hover { color: var(--ink); }
+
+  .cart-items { flex: 1; overflow-y: auto; padding: 1.5rem 2rem; }
+
+  .cart-empty {
+    text-align: center; padding: 3rem 0;
+    color: var(--muted); font-size: 0.88rem;
+  }
+
+  .cart-empty span { display: block; font-size: 2.5rem; margin-bottom: 1rem; }
+
+  .cart-item {
+    display: grid; grid-template-columns: 64px 1fr auto;
+    gap: 1rem; align-items: center; padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cart-item-img {
+    width: 64px; height: 80px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.2rem; background: var(--bg);
+  }
+
+  .cart-item-name { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; margin-bottom: 0.3rem; }
+  .cart-item-price { font-size: 0.8rem; color: var(--muted); }
+
+  .cart-item-remove {
+    background: none; border: none; cursor: pointer;
+    color: var(--muted); font-size: 1rem; transition: color 0.2s;
+  }
+  .cart-item-remove:hover { color: #c0392b; }
+
+  .cart-foot {
+    padding: 2rem; border-top: 1px solid var(--border);
+  }
+
+  .cart-total {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  .cart-total span { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+  .cart-total strong { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; }
+
+  .checkout-btn {
+    width: 100%; background: var(--ink); color: var(--white); border: none;
+    padding: 1rem; font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.25s;
+  }
+  .checkout-btn:hover { background: var(--accent); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); color: rgba(255,255,255,0.6);
+    padding: 4rem 5rem 2rem;
+  }
+
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem; margin-bottom: 3rem;
+  }
+
+  .footer-brand .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 300; letter-spacing: 0.22em;
+    color: var(--white); margin-bottom: 1rem; display: block;
+  }
+
+  .footer-brand p { font-size: 0.82rem; line-height: 1.7; max-width: 240px; }
+
+  .footer-col h4 {
+    font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); margin-bottom: 1.2rem;
+  }
+
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col ul a {
+    font-size: 0.83rem; color: rgba(255,255,255,0.55);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-col ul a:hover { color: var(--white); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 0.75rem;
+  }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px);
+    background: var(--ink); color: var(--white);
+    padding: 0.8rem 1.8rem; font-size: 0.78rem; letter-spacing: 0.08em;
+    z-index: 300; transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">CLOSET ATTIRE</a>
+  <ul class="nav-links">
+    <li><a href="#products">New In</a></li>
+    <li><a href="#products">Women</a></li>
+    <li><a href="#products">Men</a></li>
+    <li><a href="#featured">Collections</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <div class="search-wrap">
+      <input type="text" placeholder="Search..." id="searchInput">
+      <span class="search-icon">⌕</span>
+    </div>
+    <button class="cart-btn" onclick="toggleCart()">
+      Bag <span class="cart-badge" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Spring / Summer Collection 2026</p>
+    <h1 class="hero-title">Wear the<br><em>Silence</em><br>of Form</h1>
+    <p class="hero-sub">Refined essentials crafted for the modern wardrobe. Where restraint becomes expression.</p>
+    <a href="#products" class="btn-primary">Explore Collection →</a>
+  </div>
+  <div class="hero-image">
+    <div class="hero-image-inner">
+      <div class="hero-mannequin">✦</div>
+    </div>
+    <div class="hero-tag">
+      <strong>New Arrivals</strong>
+      SS 2026 — 42 Pieces
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE STRIP -->
+<div class="strip">
+  <div class="strip-inner" id="stripInner"></div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="section" id="products">
+  <div class="section-header">
+    <h2 class="section-title">New <em>Arrivals</em></h2>
+    <a href="#" class="section-link">View All →</a>
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- FEATURED BANNER -->
+<div class="featured-banner" id="featured">
+  <div class="featured-visual">🌿</div>
+  <div class="featured-content">
+    <span class="eyebrow">Exclusive Drop</span>
+    <h2>The Linen<br>Atelier Edit</h2>
+    <p>Hand-selected natural linens from European mills. Breathable, timeless, and crafted to last decades — not seasons.</p>
+    <a href="#products" class="btn-primary">Shop The Edit →</a>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-info">
+    <h2>Let's <em>Connect</em></h2>
+    <p>Have questions about sizing, styling advice, or a bespoke order? Our team is here to help you find your perfect fit.</p>
+    <div class="contact-detail">
+      <span>📍 <strong>12 Fashion Street, New Delhi — 110001</strong></span>
+      <span>✉️ <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dab2bfb6b6b59ab7bbb3a9b5b4a9aeb5a8bff4b3b4">[email&#160;protected]</a></strong></span>
+      <span>📞 <strong>+91 98765 43210</strong></span>
+      <span>🕐 <strong>Mon–Sat, 10am–7pm IST</strong></span>
+    </div>
+  </div>
+  <form class="contact-form" onsubmit="handleContact(event)">
+    <div class="form-row">
+      <div class="form-group">
+        <label>First Name</label>
+        <input type="text" placeholder="Amit">
+      </div>
+      <div class="form-group">
+        <label>Last Name</label>
+        <input type="text" placeholder="Singh">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" placeholder="you@email.com">
+    </div>
+    <div class="form-group">
+      <label>Subject</label>
+      <select>
+        <option value="">Select a topic...</option>
+        <option>Order Enquiry</option>
+        <option>Sizing Help</option>
+        <option>Wholesale</option>
+        <option>General</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Message</label>
+      <textarea placeholder="Tell us how we can help..."></textarea>
+    </div>
+    <button type="submit" class="form-submit">Send Message →</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">CLOSET ATTIRE</span>
+      <p>Modern fashion essentials for the conscious wardrobe. Ethically made, beautifully designed.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#">New In</a></li>
+        <li><a href="#">Women</a></li>
+        <li><a href="#">Men</a></li>
+        <li><a href="#">Accessories</a></li>
+        <li><a href="#">Sale</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">Sizing Guide</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">Shipping</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Follow</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Pinterest</a></li>
+        <li><a href="#">YouTube</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 CLOSET ATTIRE. All rights reserved.</span>
+    <span>Privacy · Terms · Cookies</span>
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h3>Your Bag</h3>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty"><span>🛍</span>Your bag is empty.<br>Start exploring above.</div>
+  </div>
+  <div class="cart-foot">
+    <div class="cart-total">
+      <span>Total</span>
+      <strong id="cartTotal">₹0</strong>
+    </div>
+    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout →</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const products = [
+  { id:1, name:"Linen Wrap Dress", cat:"Women", price:4299, emoji:"👗", badge:"New" },
+  { id:2, name:"Tailored Blazer", cat:"Men", price:6499, emoji:"🧥", badge:null },
+  { id:3, name:"Silk Cami Set", cat:"Women", price:3799, oldPrice:4999, emoji:"✨", badge:"Sale" },
+  { id:4, name:"Relaxed Chinos", cat:"Men", price:2999, emoji:"👖", badge:"New" },
+  { id:5, name:"Oversized Linen Shirt", cat:"Unisex", price:2499, emoji:"👕", badge:null },
+  { id:6, name:"Slip Midi Skirt", cat:"Women", price:3199, emoji:"🌸", badge:"New" },
+  { id:7, name:"Classic Trench", cat:"Unisex", price:8999, oldPrice:11999, emoji:"🧣", badge:"Sale" },
+  { id:8, name:"Knit Polo", cat:"Men", price:1999, emoji:"🟤", badge:null },
+];
+
+let cart = [];
+
+// Render products
+const grid = document.getElementById('productsGrid');
+products.forEach(p => {
+  const card = document.createElement('div');
+  card.className = 'product-card';
+  card.innerHTML = `
+    <div class="product-image">
+      <div class="product-image-inner" style="background:linear-gradient(135deg,#EDE8E1,#D9D0C4);">
+        ${p.emoji}
+        ${p.badge ? `<span class="product-badge ${p.badge==='Sale'?'sale':''}">${p.badge}</span>` : ''}
+      </div>
+      <button class="product-add" onclick="addToCart(${p.id})">Add to Bag +</button>
+    </div>
+    <p class="product-cat">${p.cat}</p>
+    <p class="product-name">${p.name}</p>
+    <div class="product-meta">
+      <span class="product-price">
+        ${p.oldPrice ? `<span class="old">₹${p.oldPrice.toLocaleString()}</span>` : ''}
+        ₹${p.price.toLocaleString()}
+      </span>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+
+// Marquee
+const items = ["Free Shipping Above ₹2000","New SS26 Collection","Handcrafted Quality","Sustainable Materials","Easy Returns — 30 Days","Secure Payments"];
+const strip = document.getElementById('stripInner');
+[...items,...items].forEach(t => {
+  strip.innerHTML += `<span class="strip-item">${t}</span>`;
+});
+
+// Cart logic
+function addToCart(id) {
+  const p = products.find(x => x.id === id);
+  const existing = cart.find(x => x.id === id);
+  if (existing) { existing.qty++; }
+  else { cart.push({ ...p, qty: 1 }); }
+  updateCart();
+  showToast(`${p.emoji} ${p.name} added to bag`);
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(x => x.id !== id);
+  updateCart();
+}
+
+function updateCart() {
+  const count = cart.reduce((s,x) => s + x.qty, 0);
+  document.getElementById('cartCount').textContent = count;
+  const total = cart.reduce((s,x) => s + x.price * x.qty, 0);
+  document.getElementById('cartTotal').textContent = `₹${total.toLocaleString()}`;
+  const itemsEl = document.getElementById('cartItems');
+  if (cart.length === 0) {
+    itemsEl.innerHTML = '<div class="cart-empty"><span>🛍</span>Your bag is empty.<br>Start exploring above.</div>';
+    return;
+  }
+  itemsEl.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <div class="cart-item-img">${item.emoji}</div>
+      <div>
+        <p class="cart-item-name">${item.name}</p>
+        <p class="cart-item-price">₹${item.price.toLocaleString()} × ${item.qty}</p>
+      </div>
+      <button class="cart-item-remove" onclick="removeFromCart(${item.id})">✕</button>
+    </div>
+  `).join('');
+}
+
+function toggleCart() {
+  document.getElementById('cartDrawer').classList.toggle('open');
+  document.getElementById('cartOverlay').classList.toggle('open');
+}
+
+function checkout() {
+  if (cart.length === 0) { showToast('Your bag is empty!'); return; }
+  showToast('Redirecting to checkout... ✓');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function handleContact(e) {
+  e.preventDefault();
+  showToast('Message sent! We\'ll reply soon ✓');
+  e.target.reset();
+}
+
+// Search filter
+document.getElementById('searchInput').addEventListener('input', function() {
+  const q = this.
